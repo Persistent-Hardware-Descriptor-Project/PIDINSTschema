@@ -1,0 +1,63 @@
+# Document Start
+---
+id: https://example.org/schemas/pidinst
+name: PIDINST
+description: Instrument instance metadata that complies with the RDA PIDINST recommendations
+title: PIDINST schema
+in_subset:
+- combination_classes
+from_schema: https://w3id.org/mixs
+is_a: xyz
+mixins:
+- xyz
+attributes:
+  identifier:
+    name: identifier
+    annotations:
+      Preferred_unit:
+        tag: Preferred_unit
+        value: ''
+    description: Unique string that identifies the instrument instance
+    title: Identifier
+    examples:
+    - value: https://doi.org/10.1080/10509585
+    in_subset:
+    - xyz
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    keywords:
+    - PID
+    - Instrument
+    slot_uri: PIDINST:1
+    alias: identifier
+    owner: RDA WG Persistent Identification of Instruments (PIDINST WG)
+    domain_of:    
+    range: string
+    required: true
+  identifierType:
+    name: identifierType
+    annotations:
+      Expected_value:
+        tag: xyz
+        value: xyz
+    description: Type of the identifier
+    title: Identifier Type
+    examples:
+    - value: DOI, ePIC, B2INST
+    in_subset:
+    - xyz
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    keywords:
+    - PID
+    - Instrument
+    slot_uri: PIDINST:1.1
+    alias: identifierType
+    owner: RDA WG Persistent Identification of Instruments (PIDINST WG) 
+    domain_of:
+    range: string
+    required: true
+
+class_uri: PIDINST:XYZ
+
+
+# Document End
+...
