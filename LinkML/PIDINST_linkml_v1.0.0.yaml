@@ -3,61 +3,668 @@
 id: https://example.org/schemas/pidinst
 name: PIDINST
 description: Instrument instance metadata that complies with the RDA PIDINST recommendations
+conforms_to: pidinst-schema-1_0.schema.json
 title: PIDINST schema
-in_subset:
-- combination_classes
-from_schema: https://w3id.org/mixs
-is_a: xyz
-mixins:
-- xyz
-attributes:
+owner: RDA WG Persistent Identification of Instruments (PIDINST WG)
+created_on: 
+last_updated_on: 
+created_by: RDA WG Persistent Identification of Instruments (PIDINST WG)
+version: v1.0.0
+license: https://creativecommons.org/publicdomain/zero/1.0/
+keywords:
+    - PID
+    - Instrument
+    - Persistent Identifier
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  personinfo: https://w3id.org/linkml/examples/personinfo/
+  ORCID: https://orcid.org/
+  rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  xsd: <http://www.w3.org/2001/XMLSchema#>
+  schema1: <http://schema.org/>
+
+imports:
+  - linkml:types
+default_range: string
+
+classes:
+ # The PIDINST schema has a single class that contains the fields recommended by the RDA WG Persistent Identification of Instruments (PIDINST WG) 
+
+PIDINSTschema:
+    description: The PIDINST schema
+    slots:
+      - identifier
+      - identifierType
+      - schemaVersion
+      - landingPage
+      - name
+      - owners
+      - manufacturers
+      - model
+      - description
+      - instrumentTypes
+      - measuredVariables
+      - dates
+      - relatedIdentifiers
+      - alternateIdentifiers
+
+slots:
+  # PIDINST schema fields
+  
   identifier:
     name: identifier
     annotations:
-      Preferred_unit:
-        tag: Preferred_unit
-        value: ''
+      Format:
+        tag: Format
+        value: URI
+      Expected_value:
+        tag: Expected_value 
+        value: Globally unique identifier
     description: Unique string that identifies the instrument instance
     title: Identifier
     examples:
     - value: https://doi.org/10.1080/10509585
-    in_subset:
-    - xyz
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
-    keywords:
-    - PID
-    - Instrument
-    slot_uri: PIDINST:1
-    alias: identifier
-    owner: RDA WG Persistent Identification of Instruments (PIDINST WG)
-    domain_of:    
+    conforms_to: PIDINST:1.0
+    alias: identifier 
     range: string
     required: true
+    
   identifierType:
     name: identifierType
-    annotations:
-      Expected_value:
-        tag: xyz
-        value: xyz
     description: Type of the identifier
     title: Identifier Type
     examples:
-    - value: DOI, ePIC, B2INST
-    in_subset:
-    - xyz
+    - value: DOI
+    - value: ePIC
+    - value: B2INST
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
-    keywords:
-    - PID
-    - Instrument
-    slot_uri: PIDINST:1.1
+    conforms_to: PIDINST:1.1
     alias: identifierType
-    owner: RDA WG Persistent Identification of Instruments (PIDINST WG) 
-    domain_of:
     range: string
     required: true
 
-class_uri: PIDINST:XYZ
+  schemaVersion:
+    name: schemaVersion
+    description: Version number of thePIDINST schema used in this record
+    title: Identifier Type
+    examples:
+    - value: 1.0
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:2.0
+    alias: schemaVersion
+    range: string
+    required: true
+    ifabsent: string(1.0)
+      
+  landingPage:
+    name: landingPage
+    annotations:
+      Format:
+        tag: Format 
+        value: uri
+    description: A landing page that the identifier resolves to
+    title: Landing Page
+    examples:
+    - value: https://example.org/instrument0001
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:3.0
+    alias: landingPage
+    range: string
+    required: true
+    
+  name:
+    name: name
+    annotations:
+      Expected_value:
+        tag: Expected_value
+        value: ''
+    description: Name by which the instrument instance is known
+    title: Name
+    examples:
+    - value: stanford-bintu_lab_orca_leica_dmi8_fujimori_2023_biorxiv_scope1
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:4.0
+    alias: name
+    range: string
+    required: true
+    
+  owners:
+    name: owners
+    description: Institution(s) responsible for the management of the instrument. This may include the legal owner, the operator or an institute providing access to the instrument.
+    title: Owners
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:5
+    alias: owners
+    required: true
+    range: Owner   ## see "complex types" section below
+    multivalued: true
+    minimum_cardinality: 1
 
+  manufacturers:
+    name: manufacturers
+    description: The isntrument's manufacturer(s) or developer. This may also be the owner for custom build instruments.
+    title: Manufacturers
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:6
+    alias: manufacturers
+    required: true
+    range: Manufacturer   ## see "complex types" section below
+    multivalued: true
+    minimum_cardinality: 1
+
+  model:
+    name: model
+    description: Name of the model or type of device as attributed by the manufacturer.
+    title: Model
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:7
+    alias: manufacturers
+    range: Model   ## see "complex types" section below
+    
+  description:
+    name: description
+    description: Technical description of the device and its capabilities.
+    title: Description
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:8.0
+    alias: description
+    range: string
+    
+  instrumentTypes:
+    name: instrumentTypes
+    description: Classification of the type of the instrument.
+    title: Instrument Types
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:9
+    alias: instrumentTypes
+    range: InstrumentType   ## see "complex types" section below
+    multivalued: true
+    
+  measuredVariables:
+    name: measuredVariables
+    description: The variable(s) that this instrument measures or observes.
+    title: Measured Variables
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:10
+    alias: measuredVariables
+    multivalued: true
+
+  dates:
+    name: dates
+    description: Dates relevant to the instrument.
+    title: Dates
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:11
+    alias: dates
+    required: true
+    range: Date   ## see "complex types" section below
+    multivalued: true
+
+  relatedIdentifiers:
+    name: relatedIdentifiers
+    description: Identifiers of related resources.
+    title: Related Identifiers
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:12
+    alias: relatedIdentifiers
+    required: true
+    range: RelatedIdentifier   ## see "complex types" section below
+    multivalued: true
+
+  alternateIdentifiers:
+    name: alternateIdentifiers
+    description: Identifiers other than the PIDINST pertaining to the same instrument instance. This should be used if the instrument has a serial number. Other possible uses include an owner’s inventory number or an entry in some instrument data base.
+    title: Alternate Identifiers
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:13
+    alias: alternateIdentifiers
+    required: true
+    range: AlternateIdentifiers   ## see "complex types" section below
+    multivalued: true
+
+    # PIDINST schema complex types
+
+  Owner:
+    name: owner
+    description: Institution(s) responsible for the management of the instrument. This may include the legal owner, the operator or an institute providing access to the instrument.
+    title: Owner
+    examples:
+    - value: UMass Chan Medical School BioMedical Imaging Group
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    class_uri: PIDINST:5
+    slots:   ## see "complex types slots" section below
+        - ownerName
+        - ownerContact
+        - ownerIdentifier
+        - ownerIdentifierType
+
+  Manufacturer:
+    name: manufacturer
+    description: The isntrument's manufacturer(s) or developer. This may also be the owner for custom build instruments.
+    title: Manufacturer
+    examples:
+    - value: Leica Microsystems
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    class_uri: PIDINST:6
+    slots:   ## see "complex types slots" section below
+        - manufacturerName
+        - manufacturerIdentifier
+        - manufacturerIdentifierType
+
+  Model:
+    name: model
+    description: The isntrument's manufacturer(s) or developer. This may also be the owner for custom build instruments.
+    title: model
+    examples:
+    - value: SP8
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    class_uri: PIDINST:7
+    slots:   ## see "complex types slots" section below
+        - modelName
+        - modelIdentifier
+        - modelIdentifierType
+
+  InstrumentType:
+    name: manufacturer
+    description: Classification of the type of the instrument.
+    title: Manufacturer
+    examples:
+    - value: Optical Microscope
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    class_uri: PIDINST:9
+    slots:   ## see "complex types slots" section below
+        - instrumentTypeName
+        - instrumentTypeIdentifier
+        - instrumentTypeIdentifierType 
+ 
+  Date:
+    name: date
+    description: Date relevant to the instrument.
+    title: Date
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    class_uri: PIDINST:11
+    slots:   ## see "complex types slots" section below
+        - date
+        - dateType
+    
+  RelatedIdentifier:
+    name: RelatedIdentifier
+    description: Identifiers of related resources.
+    title: Related Identifier
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    class_uri: PIDINST:12
+    slots:   ## see "complex types slots" section below
+        - relatedIdentifierName
+        - relatedIdentifier
+        - relatedIdentifierType
+        - relationType
+
+  AlternateIdentifier:
+    name: AlternateIdentifier
+    description: Identifiers other than the PIDINST pertaining to the same instrument instance. This should be used if the instrument has a serial number. Other possible uses include an owner’s inventory number or an entry in some instrument data base.
+    title: Alternate Identifier
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    class_uri: PIDINST:13
+    slots:   ## see "complex types slots" section below
+        - alternateIdentifierName
+        - alternateIdentifier
+        - alternateIdentifierType
+
+    # PIDINST schema complex types slots
+   
+  ownerName:
+    name: ownerName
+    description: Full name of the owner
+    title: Owner Name
+    examples:
+    - value: John Doe
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:5.1
+    alias: ownerName 
+    range: string
+    required: true
+    
+  ownerContact:
+    name: ownerContact
+    annotations:
+      Format:
+        tag: Format 
+        value: email address
+    description: Contact address of the owner
+    title: Owner Contact
+    examples:
+    - value: John.Doe@xyz.org
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:5.2
+    alias: ownerName 
+    range: string
+    required: true
+    
+  ownerIdentifier:
+    name: ownerIdentifier
+    annotations:
+      Format:
+        tag: Format
+        value: URI
+      Expected_value:
+        tag: Expected_value 
+        value: Globally unique identifier
+    description: Identifier used to identify the owner
+    title: Owner Identifier
+    examples:
+    - value: https://orcid.org/0000-0002-1069-1816
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:5.3
+    alias: ownerIdentifier 
+    range: string
+    required: true
+    
+  ownerIdentifierType:
+    name: ownerIdentifierType
+    description: Type of the identifier used to identify the owner
+    title: Owner Identifier Type
+    examples:
+    - value: ORCID, ROR, RRID
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:5.4
+    alias: ownerIdentifierType
+    range: string
+    required: true
+
+  manufacturerName:
+    name: manufacturerName
+    description: Full name of the manufacturer
+    title: Manufacturer Name
+    examples:
+    - value: Leica Microsystems
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:6.1
+    alias: manufacturerName 
+    range: string
+    required: true
+    
+  manufacturerIdentifier:
+    name: manufacturerIdentifier
+    annotations:
+      Format:
+        tag: Format
+        value: URI
+      Expected_value:
+        tag: Expected_value 
+        value: Globally unique identifier
+    description: Identifier used to identify the manufactuer
+    title: Owner Identifier
+    examples:
+    - value: https://ror.org/012xzy7a9
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:6.2
+    alias: ownerIdentifier 
+    range: string
+    
+  manufacturerIdentifierType:
+    name: manufacturerIdentifierType
+    description: Type of the identifier used to identify the manufacturer
+    title: Manufacturer Identifier Type
+    examples:
+    - value: ROR
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:6.3
+    alias: manufacturerIdentifierType
+    range: string
+
+  modelName:
+    name: modelName
+    description: Full name of the model.
+    title: Model Name
+    examples:
+    - value: SP8
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:7.1
+    alias: modelName 
+    range: string
+    required: true
+
+  modelIdentifier:
+    name: modelIdentifier
+    annotations:
+      Format:
+        tag: Format
+        value: URI
+      Expected_value:
+        tag: Expected_value 
+        value: Globally unique identifier
+    description: Identifier used to identify the model.
+    title: Model Identifier
+    examples:
+    - value: RRID:SCR_018457
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:7.2
+    alias: modelIdentifier 
+    range: string
+    
+  modelIdentifierType:
+    name: modelIdentifierType
+    description: Type of the identifier used to identify the model.
+    title: Model Identifier Type
+    examples:
+    - value: RRID
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:7.3
+    alias: modelIdentifierType
+    range: string
+
+  instrumentTypeName:
+    name: instrumentTypeName
+    description: Full name of the instrument type.
+    title: Instrument Type Name
+    examples:
+    - value: Light Microscope
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:9.1
+    alias: instrumentTypeName 
+    range: string
+    required: true
+
+  instrumentTypeIdentifier:
+    name: instrumentTypeIdentifier
+    description: Identifier used to identify the type of the instrument.
+    title: instrument Type Identifier
+    annotations:
+      Format:
+        tag: Format 
+        value: URI
+      Expected_value:
+        tag: Expected_value 
+        value: Globally unique identifier
+    examples:
+    - value: http://edamontology.org/topic_3385
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:9.2
+    alias: instrumentTypeIdentifier 
+    range: string
+    required: true
+
+  instrumentTypeIdentifierType:
+    name: instrumentTypeIdentifierType
+    description: Type of the identifier.
+    title: Instrument Type Identifier Type
+    examples:
+    - value: EDAM Ontology
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:9.3
+    alias: instrumentTypeIdentifierType 
+    range: string
+    required: true
+
+  date:
+    name: date
+    description: Date relevant to the instrument. Must confirm to ISO 8601.
+    title: Date
+    annotations:
+      Format:
+        tag: Format 
+        value: Date conforming to ISO 8601
+    examples:
+    - value: 2025-10-02
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:11.1
+    alias: date 
+    range: linkml:Date
+    required: true
+
+  dateType:
+    name: dateType
+    description: The type of the date.
+    title: Date Type
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:11.2
+    alias: dateType
+    range: DateType    ## see "enumerations" section below
+    required: true
+
+  relatedIdentifier:
+    name: relatedIdentifier
+    description: Identifier of related resources.
+    title: Related Identifier
+    annotations:
+      Format:
+        tag: Format 
+        value: URI
+      Expected_value:
+        tag: Expected_value 
+        value: Globally unique identifier
+    examples:
+    - value: https://doi.org/10.1080/10509585
+    - value: RRID:SCR_018457
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:12.0
+    alias: relatedIdentifier
+    range: string
+    required: true
+
+  relatedIdentifierType:
+    name: relatedIdentifierType
+    description: The type of the identifier.
+    title: Related Identifier Type
+    examples:
+    - value: DOI
+    - value: RRID
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:12.1
+    alias: relatedIdentifierType
+    range: RelatedIdentifierType    ## see "enumerations" section below
+    required: true
+    
+  relationType:
+    name: relationType
+    description: Description of the relationship.
+    title: Relation Type
+    examples:
+    - value: IsDescribedBy
+    - value: IsNewVersionOf
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:12.2
+    alias: relationType
+    range: RelationType    ## see "enumerations" section below
+    required: true
+
+  relatedIdentifierName:
+    name: relatedIdentifierName
+    description: A name for the related resource, may be used to indicate the content of that resource.
+    title: Related Identifier Name
+    examples:
+    - value: Doe et al., 2025, JournalName, Title
+    - value: TESM v1
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:12.3
+    alias: relatedIdentifierName 
+    range: string
+    
+  alternateIdentifier:
+    name: alternateIdentifier
+    description: Identifier other than the PIDINST pertaining to the same instrument instance. This should be used if the instrument has a serial number. Other possible uses include an owner’s inventory number or an entry in some instrument data base.
+    title: Alternate Identifier
+    annotations:
+      Expected_value:
+        tag: Expected_value 
+        value: unique identifier
+    examples:
+    - value: XYZ0000
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:13.0
+    alias: alternateIdentifier
+    range: string
+    required: true
+
+  alternateIdentifierType:
+    name: alternateIdentifierType
+    description: The type of the identifier.
+    title: Alternate Identifier Type
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:13.1
+    alias: alternateIdentifierType
+    range: AlternateIdentifierType    ## see "enumerations" section below
+    required: true
+
+  alternateIdentifierName:
+    name: alternateIdentifierName
+    description: A supplementary name for the identifier type. This is mostly useful if alternateIdentifierType is Other.
+    title: Alternate Identifier Name
+    examples:
+    - value: Entry in B2INST database
+    from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
+    conforms_to: PIDINST:13.2
+    alias: alternateIdentifierName 
+    range: string
+    
+   # PIDINST schema enumerations
+   
+enums:
+  DateType:
+    permissible_values:
+      Commissioned:
+      DeCommissioned:
+  RelatedIdentifierType:
+    permissible_values:
+      ARK:
+      arXiv:
+      bibcode:
+      DOI:
+      EAN13:
+      EISSN:
+      Handle:
+      IGSN:
+      ISBN:
+      ISSN:
+      ISTC:
+      LISSN:
+      PMID:
+      PURL:
+      RAiD:
+      RRID:
+      UPC:
+      URL:
+      URN:
+      w3id:
+  RelationType:
+    permissible_values:
+      IsDescribedBy:
+      IsNewVersionOf:
+      IsPreviousVersionOf:
+      HasComponent:
+      IsComponentOf:
+      References:
+      HasMetadata:
+      WasUsedIn:
+      IsIdenticalTo:
+      IsAttachedTo:
+  AlternateIdentifierType:
+    permissible_values:
+      SerialNumber:
+      InventoryNumber:
+      Other:
 
 # Document End
 ...
