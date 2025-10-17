@@ -1,12 +1,12 @@
 # Document Start
 id: https://example.org/schemas/pidinst
 name: PIDINST
-description: Instrument instance metadata that complies with the RDA PIDINST recommendations
+description: Instrument instance metadata that complies with the RDA PIDINST recommendations. This schema was proposed by the RDA WG Persistent Identification of Instruments (PIDINST WG).
 conforms_to: pidinst-schema-1_0.schema.json
 title: PIDINST schema
-created_on: 
-last_updated_on: 
-created_by: RDA WG Persistent Identification of Instruments (PIDINST WG)
+created_on: "2025-10-17T00:00:00Z"
+last_updated_on: "2025-10-17T00:00:00Z"
+created_by: "https://www.rd-alliance.org/groups/persistent-identification-instruments-wg/"
 version: v1.0.0
 license: https://creativecommons.org/publicdomain/zero/1.0/
 keywords:
@@ -450,7 +450,7 @@ slots:
         tag: Format 
         value: Date conforming to ISO 8601
     examples:
-    - value: 2025-10-02
+    - value: "2025-10-02"
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:11.1
     alias: date 
@@ -567,48 +567,80 @@ enums:
   DateType:
     description: "Date related to the instrument's lifecycle."
     permissible_values:
-      Commissioned: "The date in which the instrument was put in use."
-      DeCommissioned: "The date in which the instrument was decommissioned."
+      Commissioned: 
+        description: "The date in which the instrument was put in use."
+      DeCommissioned: 
+        description: "The date in which the instrument was decommissioned."
 
   RelatedIdentifierType:
     description: "The type of the related identifier."
     permissible_values:
-      DOCiD: "Africa PID Alliance Document Identifier"
-      DOI: "Digital Object Identifier"
-      arXiv: "arXiv e‑print archive identifier"
-      bibcode: "Bibliographic Code (used by NASA’s Astrophysics Data System)"
-      EAN13: "European Article Number (13‑digit version)"
-      EISSN: "Electronic International Standard Serial Number"
-      Handle: "Handle System persistent identifier"
-      ISBN: "International Standard Book Number"
-      ISSN: "International Standard Serial Number"
-      ISTC: "International Standard Text Code"
-      LISSN: "Linking ISSN (connects print and electronic versions of a series)"
-      PMID: "PubMed Identifier"
-      RAiD: "Research Activity Identifier"
-      RRID: "Research Resource Identifier"
-      UPC: "Universal Product Code"
-      URL: "Uniform Resource Locator"
-      w3id: "World Wide Web identifier (persistent identifier service hosted at w3id.org)"
+      DOCiD:
+        description: "Africa PID Alliance Document Identifier"
+      DOI:
+        description: "Digital Object Identifier"
+      arXiv:
+        description: "arXiv e‑print archive identifier" 
+      bibcode:
+        description: "Bibliographic Code (used by NASA’s Astrophysics Data System)" 
+      EAN13:
+        description: "European Article Number (13‑digit version)"
+      EISSN:
+        description: "Electronic International Standard Serial Number"
+      Handle:
+        description: "Handle System persistent identifier" 
+      ISBN:
+        description: "International Standard Book Number" 
+      ISSN:
+        description: "International Standard Serial Number" 
+      ISTC:
+        description: "International Standard Text Code"
+      LISSN:
+        description: "Linking ISSN (connects print and electronic versions of a series)" 
+      PMID:
+        description: "PubMed Identifier"
+      RAiD:
+        description: "Research Activity Identifier"
+      RRID:
+        description: "Research Resource Identifier" 
+      UPC:
+        description: "Universal Product Code"
+      URL:
+        description: "Uniform Resource Locator"
+      w3id:
+        description: "World Wide Web identifier (persistent identifier service hosted at w3id.org)"
 
   RelationType:
     description: "Description of the relationship."
     permissible_values:
-      IsDescribedBy: "Resource A is described by the cited Resource B (e.g., a specification or documentation)."
-      IsNewVersionOf: "Resource A is a newer version of the identified earlier Resource B."
-      IsPreviousVersionOf: "Resource A is an earlier version of the identified later Resource B."
-      HasComponent: "Resource A includes the identified Resource B as part of its whole."
-      IsComponentOf: "Resource A is a component of the identified larger Resource B."
-      References: "Resource A references (cites) the identified Resource B."
-      HasMetadata: "Resource A has additional metadata recorded in Resource B."
-      WasUsedIn: "Resource A was used in the creation of the identified Resource B."
-      IsIdenticalTo: "Resource A is identical to the identified Resource B."
-      IsAttachedTo: "Resource A is attached to the identified Resource B (e.g., a file attached to a record)."
+      IsDescribedBy:
+        description: "Resource A is described by the cited Resource B (e.g., a specification or documentation)."
+      IsNewVersionOf:
+        description: "Resource A is a newer version of the identified earlier Resource B."
+      IsPreviousVersionOf:
+        description: "Resource A is an earlier version of the identified later Resource B."
+      HasComponent:
+        description: "Resource A includes the identified Resource B as part of its whole."
+      IsComponentOf:
+        description: "Resource A is a component of the identified larger Resource B."
+      References:
+        description: "Resource A references (cites) the identified Resource B."
+      HasMetadata:
+        description: "Resource A has additional metadata recorded in Resource B."
+      WasUsedIn:
+        description: "Resource A was used in the creation of the identified Resource B."
+      IsIdenticalTo:
+        description: "Resource A is identical to the identified Resource B."
+      IsAttachedTo:
+        description: "Resource A is attached to the identified Resource B (e.g., a file attached to a record)."
 
   AlternateIdentifierType:
     description: "The type of the alternate identifier."
     permissible_values:
-      SerialNumber: "The instrument serial number."
-      InventoryNumber: "The instrument inventory number."
-      Other: "Another identifier for the instrument."         
+      SerialNumber: 
+        description: "The instrument serial number."
+      InventoryNumber: 
+        description: "The instrument inventory number."
+      Other: 
+        description: "Another identifier for the instrument."          
 # Document End
