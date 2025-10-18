@@ -17,10 +17,10 @@ keywords:
 prefixes:
   linkml: https://w3id.org/linkml/
   personinfo: https://w3id.org/linkml/examples/personinfo/
-  ORCID: https://orcid.org/
+  orcid: http://orcid.org/
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   xsd: http://www.w3.org/2001/XMLSchema#
-  schema1: http://schema.org/
+  schema: http://schema.org/
 
 imports:
   - linkml:types
@@ -76,11 +76,11 @@ classes:
       - instrumentTypeIdentifier
       - instrumentTypeIdentifierType
 
-  Date:
+  InstrumentDate:
     description: Date relevant to the instrument
     slots:
-      - date
-      - dateType
+      - instrumentDate
+      - instrumentDateType
 
   RelatedIdentifier:
     description: Identifiers of related resources
@@ -107,7 +107,7 @@ slots:
       - value: https://doi.org/10.1080/10509585
     from_schema: https://github.com/rdawg-p-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:1.0
-    alias: identifier 
+    alias: ID 
     range: string
     required: true
 
@@ -121,7 +121,7 @@ slots:
       - value: B2INST
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:1.1
-    alias: identifierType
+    alias: IDType
     range: string
     required: true
 
@@ -133,7 +133,6 @@ slots:
       - value: "1.0"
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:2.0
-    alias: schemaVersion
     range: string
     required: true
     ifabsent: string(1.0)
@@ -146,7 +145,6 @@ slots:
       - value: https://example.org/instrument0001
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:3.0
-    alias: landingPage
     range: string
     required: true
 
@@ -158,7 +156,6 @@ slots:
       - value: stanford-bintu_lab_orca_leica_dmi8_fujimori_2023_biorxiv.scope1
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:4.0
-    alias: name
     range: string
     required: true
 
@@ -168,7 +165,6 @@ slots:
     title: Owners
     from_schema: https://github.com/rdawg-gidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:5
-    alias: owners
     range: Owner
     required: true
     multivalued: true
@@ -180,7 +176,7 @@ slots:
     title: Manufacturers
     from_schema: https://github.com/rdawg-gidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:6
-    alias: manufacturers
+    alias: vendors
     range: Manufacturer
     required: true
     multivalued: true
@@ -192,7 +188,6 @@ slots:
     title: Model
     from_schema: https://github.com/rdawg-gidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:7
-    alias: model
     range: Model
 
   description:
@@ -201,7 +196,6 @@ slots:
     title: Description
     from_schema: https://github.com/rdawg-gidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:8.0
-    alias: description
     range: string
 
   instrumentTypes:
@@ -210,7 +204,6 @@ slots:
     title: Instrument Type
     from_schema: https://github.com/rdawg-gidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:9
-    alias: instrumentTypes
     range: InstrumentType
     multivalued: true
 
@@ -220,7 +213,6 @@ slots:
     title: Measured Variables
     from_schema: https://github.com/rdawg-gidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:10
-    alias: measuredVariables
     multivalued: true
 
   dates:
@@ -229,8 +221,7 @@ slots:
     title: Dates
     from_schema: https://github.com/rdawg-gidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:11
-    alias: dates
-    range: Date
+    range: InstrumentDate
     required: true
     multivalued: true
 
@@ -240,7 +231,6 @@ slots:
     title: Related Identifiers
     from_schema: https://github.com/rdawg-gidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:12
-    alias: relatedIdentifiers
     range: RelatedIdentifier
     required: true
     multivalued: true
@@ -251,7 +241,6 @@ slots:
     title: Alternate Identifiers
     from_schema: https://github.com/rdawg-gidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:13
-    alias: alternateIdentifiers
     range: AlternateIdentifier
     required: true
     multivalued: true
@@ -262,10 +251,9 @@ slots:
     description: Full name of the owner
     title: Owner Name
     examples:
-    - value: John Doe
+      - value: John Doe
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:5.1
-    alias: ownerName 
     range: string
     required: true
     
@@ -278,10 +266,9 @@ slots:
     description: Contact address of the owner
     title: Owner Contact
     examples:
-    - value: John.Doe@xyz.org
+      - value: John.Doe@xyz.org
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:5.2
-    alias: ownerName 
     range: string
     required: true
     
@@ -297,10 +284,9 @@ slots:
     description: Identifier used to identify the owner
     title: Owner Identifier
     examples:
-    - value: https://orcid.org/0000-0002-1069-1816
+      - value: https://orcid.org/0000-0002-1069-1816
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:5.3
-    alias: ownerIdentifier 
     range: string
     required: true
     
@@ -309,10 +295,9 @@ slots:
     description: Type of the identifier used to identify the owner
     title: Owner Identifier Type
     examples:
-    - value: ORCID, ROR, RRID
+      - value: ORCID, ROR, RRID
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:5.4
-    alias: ownerIdentifierType
     range: string
     required: true
 
@@ -321,10 +306,12 @@ slots:
     description: Full name of the manufacturer
     title: Manufacturer Name
     examples:
-    - value: Leica Microsystems
+      - value: Leica Microsystems
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:6.1
-    alias: manufacturerName 
+    aliases: 
+      - vendorName
+      - builderName
     range: string
     required: true
     
@@ -340,10 +327,9 @@ slots:
     description: Identifier used to identify the manufactuer
     title: Owner Identifier
     examples:
-    - value: https://ror.org/012xzy7a9
+      - value: https://ror.org/012xzy7a9
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:6.2
-    alias: ownerIdentifier 
     range: string
     
   manufacturerIdentifierType:
@@ -351,10 +337,9 @@ slots:
     description: Type of the identifier used to identify the manufacturer
     title: Manufacturer Identifier Type
     examples:
-    - value: ROR
+      - value: ROR
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:6.3
-    alias: manufacturerIdentifierType
     range: string
 
   modelName:
@@ -362,10 +347,10 @@ slots:
     description: Full name of the model.
     title: Model Name
     examples:
-    - value: SP8
+      - value: SP8
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:7.1
-    alias: modelName 
+    alias: productName
     range: string
     required: true
 
@@ -381,10 +366,10 @@ slots:
     description: Identifier used to identify the model.
     title: Model Identifier
     examples:
-    - value: RRID:SCR_018457
+      - value: RRID:SCR_018457
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:7.2
-    alias: modelIdentifier 
+    alias: productNumber 
     range: string
     
   modelIdentifierType:
@@ -392,10 +377,9 @@ slots:
     description: Type of the identifier used to identify the model.
     title: Model Identifier Type
     examples:
-    - value: RRID
+      - value: RRID
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:7.3
-    alias: modelIdentifierType
     range: string
 
   instrumentTypeName:
@@ -403,10 +387,9 @@ slots:
     description: Full name of the instrument type.
     title: Instrument Type Name
     examples:
-    - value: Light Microscope
+      - value: Light Microscope
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:9.1
-    alias: instrumentTypeName 
     range: string
     required: true
 
@@ -422,10 +405,9 @@ slots:
         tag: Expected_value 
         value: Globally unique identifier
     examples:
-    - value: http://edamontology.org/topic_3385
+      - value: http://edamontology.org/topic_3385
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:9.2
-    alias: instrumentTypeIdentifier 
     range: string
     required: true
 
@@ -437,34 +419,31 @@ slots:
     - value: EDAM Ontology
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:9.3
-    alias: instrumentTypeIdentifierType 
     range: string
     required: true
 
-  date:
-    name: date
+  instrumentDate:
+    name: instrumentDate
     description: Date relevant to the instrument. Must confirm to ISO 8601.
-    title: Date
+    title: Instrument Date
     annotations:
       Format:
         tag: Format 
         value: Date conforming to ISO 8601
     examples:
-    - value: "2025-10-02"
+      - value: "2025-10-02"
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:11.1
-    alias: date 
-    range: linkml:Date
+    range: date
     required: true
 
-  dateType:
-    name: dateType
+  instrumentDateType:
+    name: instrumentDateType
     description: The type of the date.
-    title: Date Type
+    title: Instrument Date Type
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:11.2
-    alias: dateType
-    range: DateType
+    range: InstrumentDateType
     required: true
 
   relatedIdentifier:
@@ -479,11 +458,10 @@ slots:
         tag: Expected_value 
         value: Globally unique identifier
     examples:
-    - value: https://doi.org/10.1080/10509585
-    - value: RRID:SCR_018457
+      - value: https://doi.org/10.1080/10509585
+      - value: RRID:SCR_018457
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:12.0
-    alias: relatedIdentifier
     range: string
     required: true
 
@@ -492,11 +470,10 @@ slots:
     description: The type of the identifier.
     title: Related Identifier Type
     examples:
-    - value: DOI
-    - value: RRID
+      - value: DOI
+      - value: RRID
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:12.1
-    alias: relatedIdentifierType
     range: RelatedIdentifierType
     required: true
     
@@ -505,11 +482,10 @@ slots:
     description: Description of the relationship.
     title: Relation Type
     examples:
-    - value: IsDescribedBy
-    - value: IsNewVersionOf
+      - value: IsDescribedBy
+      - value: IsNewVersionOf
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:12.2
-    alias: relationType
     range: RelationType
     required: true
 
@@ -518,11 +494,10 @@ slots:
     description: A name for the related resource, may be used to indicate the content of that resource.
     title: Related Identifier Name
     examples:
-    - value: Doe et al., 2025, JournalName, Title
-    - value: TESM v1
+      - value: Doe et al., 2025, JournalName, Title
+      - value: TESM v1
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:12.3
-    alias: relatedIdentifierName 
     range: string
     
   alternateIdentifier:
@@ -534,10 +509,9 @@ slots:
         tag: Expected_value 
         value: unique identifier
     examples:
-    - value: XYZ0000
+      - value: XYZ0000
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:13.0
-    alias: alternateIdentifier
     range: string
     required: true
 
@@ -547,7 +521,6 @@ slots:
     title: Alternate Identifier Type
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:13.1
-    alias: alternateIdentifierType
     range: AlternateIdentifierType
     required: true
 
@@ -556,15 +529,14 @@ slots:
     description: A supplementary name for the identifier type. This is mostly useful if alternateIdentifierType is Other.
     title: Alternate Identifier Name
     examples:
-    - value: Entry in B2INST database
+      - value: Entry in B2INST database
     from_schema: https://github.com/rdawg-pidinst/schema/blob/master/schema.rst
     conforms_to: PIDINST:13.2
-    alias: alternateIdentifierName 
     range: string
 
 enums:
    # PIDINST schema controlled vocabularies
-  DateType:
+  InstrumentDateType:
     description: "Date related to the instrument's lifecycle."
     permissible_values:
       Commissioned: 

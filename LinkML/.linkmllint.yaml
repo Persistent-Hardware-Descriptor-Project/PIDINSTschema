@@ -1,0 +1,6 @@
+# Use the recommended rule set except for the standard_naming rule
+# .linkmllint.yaml
+extends: recommended
+rules:
+  standard_naming:
+    level: disabled

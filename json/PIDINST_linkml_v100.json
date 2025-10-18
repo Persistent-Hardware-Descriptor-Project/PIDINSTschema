@@ -37,32 +37,34 @@
             "title": "AlternateIdentifierType",
             "type": "string"
         },
-        "Date": {
+        "InstrumentDate": {
             "additionalProperties": false,
             "description": "Date relevant to the instrument",
             "properties": {
-                "date": {
-                    "description": "Date relevant to the instrument. Must confirm to ISO 8601."
+                "instrumentDate": {
+                    "description": "Date relevant to the instrument. Must confirm to ISO 8601.",
+                    "format": "date",
+                    "type": "string"
                 },
-                "dateType": {
-                    "$ref": "#/$defs/DateType",
+                "instrumentDateType": {
+                    "$ref": "#/$defs/InstrumentDateType",
                     "description": "The type of the date."
                 }
             },
             "required": [
-                "date",
-                "dateType"
+                "instrumentDate",
+                "instrumentDateType"
             ],
-            "title": "Date",
+            "title": "InstrumentDate",
             "type": "object"
         },
-        "DateType": {
+        "InstrumentDateType": {
             "description": "Date related to the instrument's lifecycle.",
             "enum": [
                 "Commissioned",
                 "DeCommissioned"
             ],
-            "title": "DateType",
+            "title": "InstrumentDateType",
             "type": "string"
         },
         "InstrumentType": {
@@ -94,6 +96,13 @@
             "additionalProperties": false,
             "description": "The instrument's manufacturer(s) or developer",
             "properties": {
+                "manufacturerIdentifier": {
+                    "description": "Identifier used to identify the manufactuer",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "manufacturerIdentifierType": {
                     "description": "Type of the identifier used to identify the manufacturer",
                     "type": [
@@ -104,13 +113,6 @@
                 "manufacturerName": {
                     "description": "Full name of the manufacturer",
                     "type": "string"
-                },
-                "ownerIdentifier": {
-                    "description": "Identifier used to identify the manufactuer",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
                 }
             },
             "required": [
@@ -123,13 +125,6 @@
             "additionalProperties": false,
             "description": "The instrument's model",
             "properties": {
-                "modelIdentifier": {
-                    "description": "Identifier used to identify the model.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
                 "modelIdentifierType": {
                     "description": "Type of the identifier used to identify the model.",
                     "type": [
@@ -137,13 +132,20 @@
                         "null"
                     ]
                 },
-                "modelName": {
+                "productName": {
                     "description": "Full name of the model.",
                     "type": "string"
+                },
+                "productNumber": {
+                    "description": "Identifier used to identify the model.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 }
             },
             "required": [
-                "modelName"
+                "productName"
             ],
             "title": "Model",
             "type": "object"
@@ -152,6 +154,10 @@
             "additionalProperties": false,
             "description": "Institution(s) responsible for the management of the instrument",
             "properties": {
+                "ownerContact": {
+                    "description": "Contact address of the owner",
+                    "type": "string"
+                },
                 "ownerIdentifier": {
                     "description": "Identifier used to identify the owner",
                     "type": "string"
@@ -161,13 +167,13 @@
                     "type": "string"
                 },
                 "ownerName": {
-                    "description": "Contact address of the owner",
+                    "description": "Full name of the owner",
                     "type": "string"
                 }
             },
             "required": [
                 "ownerName",
-                "ownerName",
+                "ownerContact",
                 "ownerIdentifier",
                 "ownerIdentifierType"
             ],
@@ -178,6 +184,14 @@
             "additionalProperties": false,
             "description": "The PIDINST schema",
             "properties": {
+                "ID": {
+                    "description": "Unique string that identifies the instrument instance",
+                    "type": "string"
+                },
+                "IDType": {
+                    "description": "Type of the identifier",
+                    "type": "string"
+                },
                 "alternateIdentifiers": {
                     "description": "Identifiers other than the PIDINST pertaining to the same instrument instance",
                     "items": {
@@ -188,7 +202,7 @@
                 "dates": {
                     "description": "Dates relevant to the instrument",
                     "items": {
-                        "$ref": "#/$defs/Date"
+                        "$ref": "#/$defs/InstrumentDate"
                     },
                     "type": "array"
                 },
@@ -198,14 +212,6 @@
                         "string",
                         "null"
                     ]
-                },
-                "identifier": {
-                    "description": "Unique string that identifies the instrument instance",
-                    "type": "string"
-                },
-                "identifierType": {
-                    "description": "Type of the identifier",
-                    "type": "string"
                 },
                 "instrumentTypes": {
                     "description": "Classification of the type of the instrument",
@@ -220,14 +226,6 @@
                 "landingPage": {
                     "description": "A landing page that the identifier resolves to",
                     "type": "string"
-                },
-                "manufacturers": {
-                    "description": "The instrument's manufacturer(s) or developer",
-                    "items": {
-                        "$ref": "#/$defs/Manufacturer"
-                    },
-                    "minItems": 1,
-                    "type": "array"
                 },
                 "measuredVariables": {
                     "description": "The variable(s) that this instrument measures or observes",
@@ -272,16 +270,24 @@
                 "schemaVersion": {
                     "description": "Version number of the PIDINST schema used in this record",
                     "type": "string"
+                },
+                "vendors": {
+                    "description": "The instrument's manufacturer(s) or developer",
+                    "items": {
+                        "$ref": "#/$defs/Manufacturer"
+                    },
+                    "minItems": 1,
+                    "type": "array"
                 }
             },
             "required": [
-                "identifier",
-                "identifierType",
+                "ID",
+                "IDType",
                 "schemaVersion",
                 "landingPage",
                 "name",
                 "owners",
-                "manufacturers",
+                "vendors",
                 "dates",
                 "relatedIdentifiers",
                 "alternateIdentifiers"
