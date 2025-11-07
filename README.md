@@ -5,6 +5,6 @@ The PIDINST WG produced [several outputs](https://docs.pidinst.org/en/latest/ind
 
 As part of the PIDINST [White Paper](https://docs.pidinst.org/en/latest/white-paper/index.html), the WG proposed a [Metadata Schema](https://github.com/rdawg-pidinst/schema/blob/master/schema.rst) to be used for registering any type of scientific instrument at PID providers. The schema was designed to contain "enough information to unambiguously identify the instrument across networks and infrastructures."
 
-The PIDINST WG provided an [XSD](https://github.com/rdawg-pidinst/schema/blob/master/support/pidinst-schema-1_0.xsd) and a [JSON-schema](https://github.com/rdawg-pidinst/schema/blob/master/support/pidinst-schema-1_0.schema.json) of the PIDINST Metadata Schema to be used as examples "that illustrate how the schema could be implemented [...]." but are not intended to be "authoritative."
+The PIDINST WG provided an [XSD](https://github.com/rdawg-pidinst/schema/blob/master/support/pidinst-schema-1_0.xsd) and a [JSON-schema](https://github.com/rdawg-pidinst/schema/blob/master/support/pidinst-schema-1_0.schema.json) serialization of the PIDINST Metadata Schema to be used as examples "that illustrate how the schema could be implemented [...]," but are not intended to be "authoritative."
 
 This repository contains serializations of the [PIDINST Metadata Schema](https://github.com/rdawg-pidinst/schema/blob/master/schema.rst), produced by the Imaging-PHD project in accordance with the PIDINST recommendations.
