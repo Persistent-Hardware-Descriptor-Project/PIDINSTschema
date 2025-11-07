@@ -7,4 +7,4 @@ As part of the PIDINST [White Paper](https://docs.pidinst.org/en/latest/white-pa
 
 The PIDINST WG provided an [XSD](https://github.com/rdawg-pidinst/schema/blob/master/support/pidinst-schema-1_0.xsd) and a [JSON-schema](https://github.com/rdawg-pidinst/schema/blob/master/support/pidinst-schema-1_0.schema.json) of the PIDINST Metadata Schema to be used as examples "that illustrate how the schema could be implemented [...]." but are not intended to be "authoritative."
 
-This repository contains the serialization of the [PIDINST Metadata Schema](https://github.com/rdawg-pidinst/schema/blob/master/schema.rst), produced by the Imaging-PHD project in accordance with the PIDINST recommendations.
+This repository contains serializations of the [PIDINST Metadata Schema](https://github.com/rdawg-pidinst/schema/blob/master/schema.rst), produced by the Imaging-PHD project in accordance with the PIDINST recommendations.
